@@ -28,8 +28,11 @@
 #include "util/macro.h"
 #include "util/logging.h"
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
-#include <winsock.h>
+#include <winsock2.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -131,6 +134,9 @@ int device_send_cmd(MMCDEV *dev, const uint8_t *cmd, uint8_t *buf, size_t tx, si
 
 MMCDEV *device_open(const char *path)
 {
+#ifdef MS_APP
+	return NULL;
+#else
     char    drive[] = { path[0], ':', '\\', 0 };
     char    volume[] = {'\\', '\\', '.', '\\', path[0], ':', 0};
     UINT    type;
@@ -169,6 +175,7 @@ MMCDEV *device_open(const char *path)
 
     dev->fd = fd;
     return dev;
+#endif
 }
 
 void device_close(MMCDEV **pp)

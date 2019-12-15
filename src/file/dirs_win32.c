@@ -28,8 +28,13 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
+#ifndef MS_APP
 #include <shlobj.h>
+#endif
 #include <limits.h>
 
 
@@ -40,6 +45,9 @@ char *file_get_config_home(void)
 
 char *file_get_data_home(void)
 {
+#ifdef MS_APP
+	return NULL;
+#else
     wchar_t wdir[MAX_PATH];
 
     /* Get the "Application Data" folder for the user */
@@ -55,6 +63,7 @@ char *file_get_data_home(void)
 
     BD_DEBUG(DBG_FILE, "Can't find user configuration directory !\n");
     return NULL;
+#endif
 }
 
 char *file_get_cache_home(void)
@@ -64,6 +73,9 @@ char *file_get_cache_home(void)
 
 const char *file_get_config_system(const char *dir)
 {
+#ifdef MS_APP
+	return NULL;
+#else
     static char *appdir = NULL;
     wchar_t wdir[MAX_PATH];
 
@@ -92,4 +104,5 @@ const char *file_get_config_system(const char *dir)
     }
 
     return dir;
+#endif
 }

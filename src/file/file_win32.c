@@ -34,6 +34,9 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
 
 static void _file_close(AACS_FILE_H *file)

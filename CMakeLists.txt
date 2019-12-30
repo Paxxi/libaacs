@@ -87,12 +87,18 @@ if(WINDOWS_STORE)
     PRIVATE
       MS_APP
   )
+else()
+  target_link_libraries(libaacs
+    PRIVATE
+    shell32.lib
+  )
 endif()
 
 target_link_libraries(libaacs
   PRIVATE
-	kernel32.lib
+  kernel32.lib
 )
+
 
 target_link_options(libaacs
   PRIVATE

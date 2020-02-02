@@ -18,6 +18,8 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
    USA.  */
 
+#include <gcrypt.h>
+
 #define mpi_alloc(m)        gcry_mpi_new(0)
 #define mpi_alloc_like(m)   gcry_mpi_new(0)
 #define mpi_alloc_set_ui(u) gcry_mpi_set_ui(gcry_mpi_new(0), u)

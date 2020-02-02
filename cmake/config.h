@@ -112,10 +112,3 @@
    `char[]'. */
 /* #undef YYTEXT_POINTER */
 
-#ifndef MS_APP
-/* Define to '0x0501' for IE 5.01. */
-#define _WIN32_IE 0x0600
-
-/* Define to '0x0500' for Windows XP APIs. */
-#define _WIN32_WINNT 0x0600
-#endif

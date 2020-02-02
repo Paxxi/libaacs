@@ -45,7 +45,6 @@ add_library(libaacs
   src/file/keydbcfg.h
   src/file/mmc_device.h
   src/file/mmc_device_win32.c
-  src/file/path.h
   src/libaacs/aacs.c
   src/libaacs/aacs.h
   src/libaacs/cci.c
@@ -55,7 +54,7 @@ add_library(libaacs
   src/libaacs/content_cert.h
   src/libaacs/crypto.c
   src/libaacs/crypto.h
-#  src/libaacs/ec.c
+  src/libaacs/ec.c
   src/libaacs/mkb.c
   src/libaacs/mkb.h
   src/libaacs/mmc.c
@@ -88,6 +87,11 @@ if(WINDOWS_STORE)
       MS_APP
   )
 else()
+target_compile_definitions(libaacs
+  PRIVATE
+  _WIN32_IE=0x0600
+  _WIN32_WINNT=0x0600
+)
   target_link_libraries(libaacs
     PRIVATE
     shell32.lib
